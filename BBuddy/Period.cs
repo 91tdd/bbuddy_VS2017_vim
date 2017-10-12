@@ -33,7 +33,7 @@ namespace BBuddy
             AdjustEndDate(budget); 
             AdjustStartDate(budget);
 
-            return (this.EndDate.AddDays(1) - this.StartDate).Days;
+            return (EndDate.AddDays(1) - StartDate).Days;
         }
 
         private void AdjustEndDate(Budget budget)
