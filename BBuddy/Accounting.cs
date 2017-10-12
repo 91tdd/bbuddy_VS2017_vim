@@ -14,8 +14,15 @@ namespace BBuddy
         public decimal TotalAmount(string start, string end)
         {
             var budget = _budgetRepo.GetAll().FirstOrDefault();
+            if (budget == null)
+            {
+                return 0;
+            }
+
             var overlappingDays = new Period(start, end).GetOverlappingDays(budget);
-            return overlappingDays;
+
+            var dailyAmount = budget.DailyAmount();
+            return dailyAmount * overlappingDays;
         }
     }
 }

@@ -23,5 +23,12 @@ namespace BBuddy
                 return DateTime.ParseExact(Month + days, "yyyyMMdd", null);
             }
         }
+
+        public int DailyAmount()
+        {
+            var daysOfBudgetMonth = this.LastDay.Day;
+            var dailyAmount = this.Amount / daysOfBudgetMonth;
+            return dailyAmount;
+        }
     }
 }
