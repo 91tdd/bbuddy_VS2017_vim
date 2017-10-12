@@ -7,7 +7,7 @@ namespace BBuddy
         public int Amount { get; set; }
         public string Month { get; set; }
 
-        public DateTime FirstDay
+        private DateTime FirstDay
         {
             get
             {
@@ -15,7 +15,7 @@ namespace BBuddy
             }
         }
 
-        public DateTime LastDay
+        private DateTime LastDay
         {
             get
             {
@@ -24,14 +24,15 @@ namespace BBuddy
             }
         }
 
-        public int DailyAmount()
+        private int DailyAmount()
         {
             return Amount / LastDay.Day;
         }
 
         public int GetOverlappingAmount(Period period)
         {
-            return period.GetOverlappingDays(this) * DailyAmount();
+            var periodOfBudget = new Period(FirstDay, LastDay);
+            return period.GetOverlappingDays(periodOfBudget) * DailyAmount();
         }
     }
 }

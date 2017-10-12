@@ -4,8 +4,8 @@ namespace BBuddy
 {
     public class Period
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        private DateTime StartDate { get; set; }
+        private DateTime EndDate { get; set; }
 
         private DateTime GetDateFromString(string date)
         {
@@ -18,27 +18,33 @@ namespace BBuddy
             EndDate = GetDateFromString(end);
         }
 
-        public int GetOverlappingDays(Budget budget)
+        public Period(DateTime firstDay, DateTime lastDay)
+        {
+            StartDate = firstDay;
+            EndDate = lastDay;
+        }
+
+        public int GetOverlappingDays(Period period)
         {
             if (StartDate > EndDate)
             {
                 return 0;
             }
 
-            AdjustEndDate(budget);
-            AdjustStartDate(budget);
+            AdjustEndDate(period);
+            AdjustStartDate(period);
 
             return (EndDate.AddDays(1) - StartDate).Days;
         }
 
-        private void AdjustEndDate(Budget budget)
+        private void AdjustEndDate(Period period)
         {
-            EndDate = EndDate > budget.LastDay ? budget.LastDay : EndDate;
+            EndDate = EndDate > period.EndDate ? period.EndDate : EndDate;
         }
 
-        private void AdjustStartDate(Budget budget)
+        private void AdjustStartDate(Period period)
         {
-            StartDate = StartDate < budget.FirstDay ? budget.FirstDay : StartDate;
+            StartDate = StartDate < period.StartDate ? period.StartDate : StartDate;
         }
     }
 }
