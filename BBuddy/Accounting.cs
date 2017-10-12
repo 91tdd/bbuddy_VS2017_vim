@@ -1,4 +1,6 @@
-﻿namespace BBuddy
+﻿using System.Linq;
+
+namespace BBuddy
 {
     public class Accounting
     {
@@ -11,13 +13,8 @@
 
         public decimal TotalAmount(string start, string end)
         {
-            var totalAmount = 0;
-            foreach (var budget in _budgetRepo.GetAll())
-            {
-                totalAmount += budget.GetOverlappingAmount(new Period(start, end));
-            }
-
-            return totalAmount;
+            return _budgetRepo.GetAll()
+                .Sum(b => b.GetOverlappingAmount(new Period(start, end)));
         }
     }
 }
