@@ -59,6 +59,13 @@ namespace BBuddy
             TotalAmountShouldBe(1, "20170731", "20170801");
         }
 
+        [Test]
+        public void overlapping_2_days_amount_is_20()
+        {
+            GivenBudgets(new Budget { Month = "201707", Amount = 310 });
+            TotalAmountShouldBe(20, "20170701", "20170702");
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             stubRepo.GetAll().Returns(budgets.ToList());
