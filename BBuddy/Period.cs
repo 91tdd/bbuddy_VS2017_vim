@@ -30,7 +30,7 @@ namespace BBuddy
                 return 0;
             }
 
-            AdjustEndDate(budget); 
+            AdjustEndDate(budget);
             AdjustStartDate(budget);
 
             return (EndDate.AddDays(1) - StartDate).Days;
@@ -38,10 +38,7 @@ namespace BBuddy
 
         private void AdjustEndDate(Budget budget)
         {
-            if (EndDate > budget.LastDay)
-            {
-                EndDate = budget.LastDay;
-            }
+            EndDate = EndDate > budget.LastDay ? budget.LastDay : EndDate;
         }
 
         public bool WithoutOverlapping(Budget budget)
@@ -51,10 +48,7 @@ namespace BBuddy
 
         private void AdjustStartDate(Budget budget)
         {
-            if (this.StartDate < budget.FirstDay)
-            {
-                this.StartDate = budget.FirstDay;
-            }
+            StartDate = StartDate < budget.FirstDay ? budget.FirstDay : StartDate;
         }
     }
 }
