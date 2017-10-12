@@ -38,6 +38,13 @@ namespace BBuddy
             TotalAmountShouldBe(0, "20170630", "20170630");
         }
 
+        [Test]
+        public void without_overlapping_after_budget_month()
+        {
+            GivenBudgets(new Budget { Month = "201707", Amount = 31 });
+            TotalAmountShouldBe(0, "20170801", "20170801");
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             stubRepo.GetAll().Returns(budgets.ToList());
