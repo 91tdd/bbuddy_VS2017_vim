@@ -1,7 +1,5 @@
-﻿using System;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BBuddy
@@ -49,25 +47,6 @@ namespace BBuddy
         {
             decimal totalAmount = accounting.TotalAmount(start, end);
             Assert.AreEqual(expected, totalAmount);
-        }
-    }
-
-    public interface IBudgetRepo
-    {
-        List<Budget> GetAll();
-    }
-
-    public class Budget
-    {
-        public int Amount { get; set; }
-        public string Month { get; set; }
-
-        public DateTime FirstDay
-        {
-            get
-            {
-                return DateTime.ParseExact(Month + "01", "yyyyMMdd", null);
-            }
         }
     }
 }
