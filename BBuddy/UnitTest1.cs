@@ -77,6 +77,17 @@ namespace BBuddy
             TotalAmountShouldBe(11, "20170630", "20170701");
         }
 
+        [Test]
+        public void start_is_after_end()
+        {
+            GivenBudgets(
+                new Budget { Month = "201706", Amount = 30 },
+                new Budget { Month = "201707", Amount = 310 }
+                );
+
+            TotalAmountShouldBe(0, "20180630", "20170701");
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             stubRepo.GetAll().Returns(budgets.ToList());
