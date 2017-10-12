@@ -54,11 +54,7 @@ namespace BBuddy
 
         public bool WithoutOverlapping(Budget budget)
         {
-            if (StartDate > budget.LastDay)
-            {
-                return true;
-            }
-            return this.EndDate < budget.FirstDay;
+            return StartDate > budget.LastDay || EndDate < budget.FirstDay;
         }
     }
 }
