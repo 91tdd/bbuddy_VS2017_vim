@@ -30,13 +30,18 @@ namespace BBuddy
                 return 0;
             }
 
+            AdjustEndDate(budget); 
+            AdjustStartDate(budget);
+
+            return (this.EndDate.AddDays(1) - this.StartDate).Days;
+        }
+
+        private void AdjustEndDate(Budget budget)
+        {
             if (EndDate > budget.LastDay)
             {
                 EndDate = budget.LastDay;
             }
-
-            AdjustStartDate(budget);
-            return (this.EndDate.AddDays(1) - this.StartDate).Days;
         }
 
         public bool WithoutOverlapping(Budget budget)
