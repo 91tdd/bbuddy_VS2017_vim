@@ -17,18 +17,34 @@ namespace BBuddy
             var budget = _budgetRepo.GetAll().FirstOrDefault();
             if (budget != null)
             {
-                var startDate = DateTime.ParseExact(start, "yyyyMMdd", null);
-                var endDate = DateTime.ParseExact(end, "yyyyMMdd", null);
-                if (endDate < budget.FirstDay)
+                var period = new Period(GetDateFromString(start), GetDateFromString(end));
+                if (period.EndDate < budget.FirstDay)
                 {
                     return 0;
                 }
 
-                var days = (endDate.AddDays(1) - startDate).Days;
+                var days = (GetDateFromString(end).AddDays(1) - GetDateFromString(start)).Days;
                 return days;
             }
 
             return 0;
+        }
+
+        private DateTime GetDateFromString(string date)
+        {
+            return DateTime.ParseExact(date, "yyyyMMdd", null);
+        }
+    }
+
+    public class Period
+    {
+        public DateTime StartDate { get; }
+        public DateTime EndDate { get; }
+
+        public Period(DateTime startDate, DateTime endDate)
+        {
+            StartDate = startDate;
+            EndDate = endDate;
         }
     }
 }
