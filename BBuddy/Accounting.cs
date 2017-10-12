@@ -18,12 +18,12 @@ namespace BBuddy
             if (budget != null)
             {
                 var period = new Period(start, end);
-                if (period.EndDate < budget.FirstDay)
+                if (period.WithoutOverlapping(budget))
                 {
                     return 0;
                 }
 
-                var days = (period.EndDate.AddDays(1) - period.StartDate).Days;
+                var days = period.GetDays();
                 return days;
             }
 
@@ -45,6 +45,16 @@ namespace BBuddy
         {
             StartDate = GetDateFromString(start);
             EndDate = GetDateFromString(end);
+        }
+
+        public int GetDays()
+        {
+            return (this.EndDate.AddDays(1) - this.StartDate).Days;
+        }
+
+        public bool WithoutOverlapping(Budget budget)
+        {
+            return this.EndDate < budget.FirstDay;
         }
     }
 }
