@@ -5,7 +5,7 @@ namespace BBuddy
     public class Period
     {
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; }
+        public DateTime EndDate { get; set; }
 
         private DateTime GetDateFromString(string date)
         {
@@ -28,6 +28,11 @@ namespace BBuddy
             if (WithoutOverlapping(budget))
             {
                 return 0;
+            }
+
+            if (EndDate > budget.LastDay)
+            {
+                EndDate = budget.LastDay;
             }
 
             AdjustStartDate(budget);
