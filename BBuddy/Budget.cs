@@ -14,5 +14,14 @@ namespace BBuddy
                 return DateTime.ParseExact(Month + "01", "yyyyMMdd", null);
             }
         }
+
+        public DateTime LastDay
+        {
+            get
+            {
+                var days = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
+                return DateTime.ParseExact(Month + days, "yyyyMMdd", null);
+            }
+        }
     }
 }
