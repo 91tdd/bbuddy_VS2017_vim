@@ -20,6 +20,11 @@ namespace BBuddy
 
         public int GetOverlappingDays(Budget budget)
         {
+            if (budget == null)
+            {
+                return 0;
+            }
+
             if (WithoutOverlapping(budget))
             {
                 return 0;
