@@ -18,14 +18,28 @@ namespace BBuddy
             EndDate = GetDateFromString(end);
         }
 
-        public int GetDays()
+        public int GetOverlappingDays(Budget budget)
         {
+            if (WithoutOverlapping(budget))
+            {
+                return 0;
+            }
+
+            AdjustStartDate(budget);
             return (this.EndDate.AddDays(1) - this.StartDate).Days;
         }
 
         public bool WithoutOverlapping(Budget budget)
         {
             return StartDate > budget.LastDay || EndDate < budget.FirstDay;
+        }
+
+        private void AdjustStartDate(Budget budget)
+        {
+            if (this.StartDate < budget.FirstDay)
+            {
+                this.StartDate = budget.FirstDay;
+            }
         }
     }
 }

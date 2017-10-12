@@ -16,19 +16,8 @@ namespace BBuddy
             var budget = _budgetRepo.GetAll().FirstOrDefault();
             if (budget != null)
             {
-                var period = new Period(start, end);
-                if (period.WithoutOverlapping(budget))
-                {
-                    return 0;
-                }
-
-                if (period.StartDate < budget.FirstDay)
-                {
-                    period.StartDate = budget.FirstDay;
-                }
-
-                var days = period.GetDays();
-                return days;
+                var overlappingDays = new Period(start, end).GetOverlappingDays(budget);
+                return overlappingDays;
             }
 
             return 0;
