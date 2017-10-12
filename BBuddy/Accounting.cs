@@ -14,10 +14,7 @@
             var totalAmount = 0;
             foreach (var budget in _budgetRepo.GetAll())
             {
-                var overlappingDays = new Period(start, end).GetOverlappingDays(budget);
-                var dailyAmount = budget.DailyAmount();
-
-                totalAmount += overlappingDays * dailyAmount;
+                totalAmount += budget.GetOverlappingAmount(new Period(start, end));
             }
 
             return totalAmount;

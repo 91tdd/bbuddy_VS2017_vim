@@ -30,5 +30,14 @@ namespace BBuddy
             var dailyAmount = this.Amount / daysOfBudgetMonth;
             return dailyAmount;
         }
+
+        public int GetOverlappingAmount(Period period)
+        {
+            var overlappingDays = period.GetOverlappingDays(this);
+            var dailyAmount = this.DailyAmount();
+
+            var overlappingAmount = overlappingDays * dailyAmount;
+            return overlappingAmount;
+        }
     }
 }
