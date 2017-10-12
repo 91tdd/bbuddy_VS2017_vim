@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,6 @@ namespace BBuddy
         public void one_day_budget()
         {
             GivenBudgets(new Budget { Month = "201707", Amount = 31 });
-
             TotalAmountShouldBe(1, "20170701", "20170701");
         }
 
@@ -37,7 +37,6 @@ namespace BBuddy
         public void without_overlapping_before_budget_month()
         {
             GivenBudgets(new Budget { Month = "201707", Amount = 31 });
-
             TotalAmountShouldBe(0, "20170630", "20170630");
         }
 
@@ -62,5 +61,13 @@ namespace BBuddy
     {
         public int Amount { get; set; }
         public string Month { get; set; }
+
+        public DateTime FirstDay
+        {
+            get
+            {
+                return DateTime.ParseExact(Month + "01", "yyyyMMdd", null);
+            }
+        }
     }
 }

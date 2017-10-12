@@ -19,6 +19,11 @@ namespace BBuddy
             {
                 var startDate = DateTime.ParseExact(start, "yyyyMMdd", null);
                 var endDate = DateTime.ParseExact(end, "yyyyMMdd", null);
+                if (endDate < budget.FirstDay)
+                {
+                    return 0;
+                }
+
                 var days = (endDate.AddDays(1) - startDate).Days;
                 return days;
             }
