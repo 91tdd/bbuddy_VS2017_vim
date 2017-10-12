@@ -4,7 +4,7 @@
     {
         public decimal TotalAmount(string start, string end)
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
     }
 }
