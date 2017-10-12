@@ -20,7 +20,7 @@ namespace BBuddy
 
         public int GetOverlappingDays(Budget budget)
         {
-            if (WithoutOverlapping(budget))
+            if (StartDate > EndDate)
             {
                 return 0;
             }
@@ -34,11 +34,6 @@ namespace BBuddy
         private void AdjustEndDate(Budget budget)
         {
             EndDate = EndDate > budget.LastDay ? budget.LastDay : EndDate;
-        }
-
-        public bool WithoutOverlapping(Budget budget)
-        {
-            return StartDate > budget.LastDay || EndDate < budget.FirstDay;
         }
 
         private void AdjustStartDate(Budget budget)

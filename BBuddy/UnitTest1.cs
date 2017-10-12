@@ -81,11 +81,10 @@ namespace BBuddy
         public void start_is_after_end()
         {
             GivenBudgets(
-                new Budget { Month = "201706", Amount = 30 },
                 new Budget { Month = "201707", Amount = 310 }
                 );
 
-            TotalAmountShouldBe(0, "20180630", "20170701");
+            TotalAmountShouldBe(0, "20170710", "20170702");
         }
 
         private void GivenBudgets(params Budget[] budgets)
