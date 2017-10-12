@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BBuddy
 {
@@ -20,19 +21,21 @@ namespace BBuddy
         [Test]
         public void no_budget()
         {
-            stubRepo.GetAll().Returns(new List<Budget>());
+            GivenBudgets();
             TotalAmountShouldBe(0, "20170701", "20170701");
         }
 
         [Test]
         public void one_day_budget()
         {
-            stubRepo.GetAll().Returns(new List<Budget>()
-            {
-                new Budget{Month="201707",Amount=31}
-            });
+            GivenBudgets(new Budget { Month = "201707", Amount = 31 });
 
             TotalAmountShouldBe(1, "20170701", "20170701");
+        }
+
+        private void GivenBudgets(params Budget[] budgets)
+        {
+            stubRepo.GetAll().Returns(budgets.ToList());
         }
 
         private void TotalAmountShouldBe(int expected, string start, string end)
