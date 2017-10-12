@@ -22,6 +22,11 @@ namespace BBuddy
                     return 0;
                 }
 
+                if (period.StartDate < budget.FirstDay)
+                {
+                    period.StartDate = budget.FirstDay;
+                }
+
                 var days = period.GetDays();
                 return days;
             }

@@ -4,7 +4,7 @@ namespace BBuddy
 {
     public class Period
     {
-        public DateTime StartDate { get; }
+        public DateTime StartDate { get; set; }
         public DateTime EndDate { get; }
 
         private DateTime GetDateFromString(string date)
