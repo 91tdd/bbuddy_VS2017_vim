@@ -1,4 +1,7 @@
-﻿namespace BBuddy
+﻿using System;
+using System.Linq;
+
+namespace BBuddy
 {
     public class Accounting
     {
@@ -11,6 +14,15 @@
 
         public decimal TotalAmount(string start, string end)
         {
+            var budget = _budgetRepo.GetAll().FirstOrDefault();
+            if (budget != null)
+            {
+                var startDate = DateTime.ParseExact(start, "yyyyMMdd", null);
+                var endDate = DateTime.ParseExact(end, "yyyyMMdd", null);
+                var days = (endDate.AddDays(1) - startDate).Days;
+                return days;
+            }
+
             return 0;
         }
     }
